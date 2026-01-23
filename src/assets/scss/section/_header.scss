@@ -1,0 +1,143 @@
+#header{
+        @include position-fixed;
+/*     position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;*/
+/*      background-color: gray;  */
+        z-index: 1000;
+    .header_inner{
+        @include flex-between;
+        background-color: rgba(116,99,99,0.1);
+        padding: 1rem;
+        backdrop-filter: blur(15px);
+        .header_logo{
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            font-weight: 500;
+            text-align: center;
+            line-height: 1;
+
+            /* em은 자식이니까 logo안에 작성 */
+            em{
+                display: block;
+                font-size: 12px;
+            }
+        }
+        .header_nav{
+            @media(max-width:800px){
+                display: none;
+
+                &.show{
+                    display: block;
+
+                    ul{
+                        position: absolute;
+                        right: 14px;
+                        top: 68px;
+                        background-color: rgba(182, 182, 182, 0.8);
+
+
+                        li{
+                            display: block;
+                            a{
+                                display: block;
+                                padding: 10px 25px;
+
+                            }/* &.show>ul>li>a */
+                        }/* &.show>ul>li */
+                    }/* &.show>ul */
+                }/* &.show */
+
+                /* nav가 show를 가질때 : &.show 형제는 + 로 표시 */
+
+                &.show + .header_nav_mobile span::before{/*  show를 가질때만 */
+                    width: 20px;
+                }
+                &.show + .header_nav_mobile span::after{
+                    width: 20px;
+                }
+                
+            } /* 햄버거 메뉴만 나타나고 nav는 사라짐 @media(max-width:800px)*/
+
+            ul{
+
+                li{
+                    display: inline;
+                    a{
+                        padding: 14px;
+                        position: relative;
+
+                        /* = a::before */
+                        &::before{
+                            content: "";
+
+                            position: absolute;
+                            left: 0;
+                            bottom: 5px;
+                            /* 선이 아래로 감 */
+
+                            width: 95%;
+                            height: 1px;
+                            background-color: var(--black);
+
+                            transform: scaleX(0);
+                            transition: 0.3s;
+                        }
+
+                        /* 밖으로 나와서 a:hover::before */
+                        &:hover::before{
+                            transform: scaleX(1);
+                        }/* a의 가상요소 */
+                    }/* a */
+                }/* li */
+            }/* ul */ 
+        }/* .header_nav> ul>li>a */
+
+        .header_nav_mobile{/* 햄버거 메뉴+반응형 */
+            display: none;
+            width: 40px;
+            height: 40px;
+            background-color: lightpink;
+
+            @media(max-width:800px){
+                display: block;
+            }/* @media(max-width:800px) */
+
+            span{
+                display: block;
+                width: 40px;
+                height: 2px;
+                background-color: var(--black);
+                margin-top: 19px;
+                position: relative;
+
+                &::before{
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 6px;
+                    width: 40px;
+                    height: 2px;
+                    background-color: var(--black);
+                    transition: all 0.3s;
+                }/* &::before */
+
+                &::after{
+                    content: "";
+                    position: absolute;
+                    right: 0;
+                    bottom: 6px;
+                    width: 40px;
+                    height: 2px;
+                    background-color: var(--black);
+                    transition: all 0.3s;
+                }/* &::after */
+
+            }/* span */
+
+        }/* .header_nav_mobile  */
+
+    }/* header_inner */
+
+}/* header */
